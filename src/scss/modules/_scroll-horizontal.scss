@@ -1,0 +1,23 @@
+.scroll-horizontal {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+  padding: 40px;
+  align-items: center;
+  overflow-x: scroll;
+  margin-top: 40%;
+
+  .scroll {
+    flex-shrink: 0;
+    z-index: 5;
+  }
+
+  img {
+    border: 4px solid #000;
+    width: 890px;
+    height: 411px;
+    aspect-ratio: 890/411;
+    display: block;
+  }
+}

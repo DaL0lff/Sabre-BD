@@ -16,7 +16,7 @@ gsap.to(montagneDevant, {
   scrollTrigger: {
     trigger: "body",
     start: "top top",
-    end: "bottom bottom",
+    end: "bottom center",
     scrub: 1,
     markers: false,
   },
@@ -28,45 +28,76 @@ gsap.to(montagneDerriere, {
   scrollTrigger: {
     trigger: "body",
     start: "top top",
-    end: "bottom bottom",
+    end: "bottom center",
     scrub: 1,
     markers: false,
   },
 });
 
-// H1 monte et rétrécit beaucoup
-gsap.to(h1, {
-  y: -300,
-  scale: 0.3,
-  scrollTrigger: {
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1,
-    markers: false,
-  },
-});
+// Sabre monte : atteint -400 avant que montagne_01 se décale
+gsap
+  .timeline({
+    scrollTrigger: {
+      trigger: "body",
+      start: "top top",
+      end: "bottom center",
+      scrub: 1,
+      markers: false,
+    },
+  })
+  .to(sabre, { y: -400 }, 0)
+  .to(sabre, { y: -1050 }, 0.5);
 
-// Montagne_01 monte
-gsap.to(montagneFond, {
-  y: -250,
-  scrollTrigger: {
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1,
-    markers: false,
-  },
-});
+// Montagne_01 monte pendant la première moitié, puis disparait à gauche
+gsap
+  .timeline({
+    scrollTrigger: {
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1,
+      markers: false,
+    },
+  })
+  .to(montagneFond, { y: -100 }, 0)
+  .to(montagneFond, { x: -2000 }, 0.2);
 
-// Sabre monte
-gsap.to(sabre, {
-  y: -200,
-  scrollTrigger: {
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1,
-    markers: false,
-  },
-});
+// H1 monte et rétrécit pendant la première moitié, puis monte au top
+gsap
+  .timeline({
+    scrollTrigger: {
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1,
+      markers: false,
+    },
+  })
+  .to(h1, { y: -400, scale: 0.3 }, 0)
+  .to(h1, { y: -800, scale: 0.2 }, 0.5);
+
+// scroll horizontal paysage vers la droite
+const scrollContainer = document.querySelector(".scroll-container");
+const scrollHorizontal = document.querySelector(".scroll-horizontal");
+
+if (scrollContainer && scrollHorizontal) {
+  const scrollWidth = scrollHorizontal.scrollWidth;
+  const viewportWidth = window.innerWidth;
+  const distance = Math.max(scrollWidth - viewportWidth, 0);
+
+  // on fixe la hauteur du container pour avoir assez de scroll vertical
+  gsap.set(scrollContainer, { height: "100vh" });
+
+  gsap.to(scrollHorizontal, {
+    x: () => distance, // défile vers la droite
+    ease: "none",
+    scrollTrigger: {
+      trigger: scrollContainer,
+      start: "top top",
+      end: () => `+=${distance}`,
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+    },
+  });
+}
