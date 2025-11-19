@@ -1,7 +1,8 @@
 .montagne_fond {
   z-index: 1;
-  width: auto;
-  height: 1188px;
+  width: 100%; /* occupe toute la largeur */
+  height: auto; /* garde le ratio original */
+  display: block;
   flex-shrink: 0;
   aspect-ratio: 386/297;
 }

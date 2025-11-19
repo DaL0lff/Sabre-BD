@@ -46,7 +46,8 @@ gsap
     },
   })
   .to(sabre, { y: -400 }, 0)
-  .to(sabre, { y: -1050 }, 0.5);
+  .to(sabre, { y: -850 }, 0.5)
+  .to(sabre, { y: -400 }, 1);
 
 // Montagne_01 monte pendant la première moitié, puis disparait à gauche
 gsap
@@ -77,27 +78,30 @@ gsap
   .to(h1, { y: -800, scale: 0.2 }, 0.5);
 
 // scroll horizontal paysage vers la droite
-const scrollContainer = document.querySelector(".scroll-container");
-const scrollHorizontal = document.querySelector(".scroll-horizontal");
+const horizontalScroll = document.querySelector(".scroll-horizontal");
+const scrollWidth = horizontalScroll.scrollWidth - window.innerWidth;
 
-if (scrollContainer && scrollHorizontal) {
-  const scrollWidth = scrollHorizontal.scrollWidth;
-  const viewportWidth = window.innerWidth;
-  const distance = Math.max(scrollWidth - viewportWidth, 0);
+gsap.to(horizontalScroll, {
+  x: -scrollWidth,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".scroll-container",
+    start: "top top",
+    scrub: 1,
+    pin: true,
+    anticipatePin: 1,
+  },
+});
 
-  // on fixe la hauteur du container pour avoir assez de scroll vertical
-  gsap.set(scrollContainer, { height: "100vh" });
+//paysage parte vers la gauche
+const scrollMarche = document.querySelector(".scroll-marche");
 
-  gsap.to(scrollHorizontal, {
-    x: () => distance, // défile vers la droite
-    ease: "none",
-    scrollTrigger: {
-      trigger: scrollContainer,
-      start: "top top",
-      end: () => `+=${distance}`,
-      scrub: true,
-      pin: true,
-      anticipatePin: 1,
-    },
-  });
-}
+gsap.to(scrollMarche, {
+  x: -500, // vers la gauche, ajuste la valeur
+  scrollTrigger: {
+    trigger: ".scroll-jugement", // quand ce bloc arrive
+    start: "top center", // ajuste le point de départ
+    end: "bottom center",
+    scrub: 1,
+  },
+});
