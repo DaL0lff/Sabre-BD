@@ -34,20 +34,20 @@ gsap.to(montagneDerriere, {
   },
 });
 
-// Sabre monte : atteint -400 avant que montagne_01 se décale
-gsap
-  .timeline({
-    scrollTrigger: {
-      trigger: "body",
-      start: "top top",
-      end: "bottom center",
-      scrub: 1,
-      markers: false,
-    },
-  })
-  .to(sabre, { y: -400 }, 0)
-  .to(sabre, { y: -850 }, 0.5)
-  .to(sabre, { y: -400 }, 1);
+// // Sabre monte : atteint -400 avant que montagne_01 se décale
+// gsap
+//   .timeline({
+//     scrollTrigger: {
+//       trigger: "body",
+//       start: "top top",
+//       end: "bottom center",
+//       scrub: 1,
+//       markers: false,
+//     },
+//   })
+//   .to(sabre, { y: -400 }, 0)
+//   .to(sabre, { y: -850 }, 0.5)
+//   .to(sabre, { y: -400 }, 1);
 
 // Montagne_01 monte pendant la première moitié, puis disparait à gauche
 gsap
@@ -94,14 +94,14 @@ gsap.to(horizontalScroll, {
 });
 
 //paysage parte vers la gauche
-const scrollMarche = document.querySelector(".scroll-marche");
+// const scrollMarche = document.querySelector(".scroll-marche");
 
-gsap.to(scrollMarche, {
-  x: -500, // vers la gauche, ajuste la valeur
-  scrollTrigger: {
-    trigger: ".scroll-jugement", // quand ce bloc arrive
-    start: "top center", // ajuste le point de départ
-    end: "bottom center",
-    scrub: 1,
-  },
-});
+// gsap.to(scrollMarche, {
+//   x: -500, // vers la gauche, ajuste la valeur
+//   scrollTrigger: {
+//     trigger: ".scroll-jugement", // quand ce bloc arrive
+//     start: "top center", // ajuste le point de départ
+//     end: "bottom center",
+//     scrub: 1,
+//   },
+// });
