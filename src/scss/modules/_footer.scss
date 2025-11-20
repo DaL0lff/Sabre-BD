@@ -1,12 +1,12 @@
 footer {
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  position: absolute;
-  img {
-    position: relative;
-    bottom: 0;
-    z-index: 0;
-  }
+  position: relative;
+
+  background-image: url("../images/montagne_01.webp");
+  background-position-y: calc(100% - -800px);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .footer-sous-titre {
@@ -58,24 +58,27 @@ footer {
   align-items: center;
   gap: 73px;
   width: 100vw;
+  margin-bottom: 200;
 }
 
 .footer-bas {
   background: linear-gradient(
     180deg,
-    rgba(100, 120, 100, 0.9) 0%,
-    rgba(60, 80, 60, 0.95) 100%
+    rgba(105, 109, 83, 0) 0%,
+    rgba(46, 48, 37, 0.47) 38.46%,
+    rgba(0, 0, 0, 0.85) 86.06%
   );
   color: white;
-  padding: 40px 20px;
+  padding: 40px 100px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .footer-content {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -88,6 +91,7 @@ footer {
   flex-direction: column;
   justify-content: space-between;
   gap: 15px;
+  width: 100%;
 }
 
 .footer-logo {
