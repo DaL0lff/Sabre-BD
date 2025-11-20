@@ -8,8 +8,8 @@
   </head>
   <body>
     <header>
-      <button>Obtenir le livre</button>
-      <button>
+      <button><a href="#target">Obtenir le livre</a></button>
+      <!-- <button>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="13"
@@ -22,15 +22,15 @@
             fill="black"
           />
         </svg>
-      </button>
+      </button> -->
     </header>
-    <main>
+    <section class="début">
       <img
         class="montagne_devant"
         src="images/montagne_03.webp"
         alt="montagne"
       />
-      <!-- <img class="montagen_sabre" src="images/sabre.webp" alt="sabre" /> -->
+      <img class="montagne_sabre" src="images/sabre.webp" alt="sabre" />
       <h1>sabre</h1>
       <img
         class="montagne_derriere"
@@ -38,9 +38,9 @@
         alt="montagne"
       />
       <img class="montagne_fond" src="images/montagne_01.webp" alt="montagne" />
-    </main>
+    </section>
 
-    <section style="height: 1200px; background: white"></section>
+    <section style="height: 5000px; background: white"></section>
     <div class="scroll-container">
       <div class="scroll-horizontal">
         <div class="scroll-marche">
@@ -63,8 +63,11 @@
         </div> -->
       </div>
     </div>
-
+    <section style="height: 500px; background: white"></section>
     <div class="chute-container">
+      <div class="chute-case">
+        <img src="images/cases.webp" alt="" />
+      </div>
       <div class="chute-univers">
         <img src="images/planete.webp" alt="planete" />
         <img src="images/astre_01.webp" alt="" />
@@ -84,7 +87,9 @@
             l’une est différente : elle marche de façon étrange, perçoit le
             monde autrement et peine à trouver sa place dans le groupe.
           </p>
-          <div class="footer-button-acheter">Acheter</div>
+          <div class="footer-button-acheter" id="target">
+            <a href="https://www.dargaud.com/9e-store">Acheter</a>
+          </div>
         </div>
       </div>
       <div class="footer-bas">

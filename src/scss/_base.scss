@@ -6,6 +6,7 @@
 
 a {
   color: inherit;
+  text-decoration: none;
 }
 
 img,
@@ -84,9 +85,21 @@ button {
   color: var(--black, #000);
   text-align: center;
   font-family: Outfit;
+  transition: all 0.3s ease-in-out;
 }
 
-main {
+button:hover {
+  opacity: 1;
+  cursor: pointer;
+  scale: 1.05;
+  background: var(--Text-main, #443e30);
+  color: var(--white, #fff);
+  border-color: var(--Text-main, #443e30);
+  box-shadow: 0 8px 20px rgba(68, 62, 48, 0.3);
+  transform: translateY(-2px);
+}
+
+.début {
   height: 100%;
   position: fixed;
   top: 0;

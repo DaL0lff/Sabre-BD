@@ -31,6 +31,19 @@ footer {
   opacity: 0.5;
   background: var(--white, #fff);
   padding: 4 46 4 46px;
+  margin-top: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer-button-acheter:hover {
+  opacity: 1;
+  cursor: pointer;
+  scale: 1.05;
+  background: var(--Text-main, #443e30);
+  color: var(--white, #fff);
+  border-color: var(--Text-main, #443e30);
+  box-shadow: 0 8px 20px rgba(68, 62, 48, 0.3);
+  transform: translateY(-2px);
 }
 
 .footer-texte {
@@ -58,7 +71,7 @@ footer {
   align-items: center;
   gap: 73px;
   width: 100vw;
-  margin-bottom: 200;
+  margin: 200px 0px;
 }
 
 .footer-bas {
@@ -113,13 +126,15 @@ footer {
   font-size: 14px;
   transition: opacity 0.3s ease;
   font-family: outfit;
+  cursor: pointer;
 }
 
 .copyright {
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.7);
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   width: 100%;
+  font-family: outfit;
 }
