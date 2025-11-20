@@ -92,7 +92,7 @@ const timelineScroll = gsap.timeline({
   scrollTrigger: {
     trigger: ".scroll-container",
     start: "top top",
-    scrub: 3,
+    scrub: 6,
     pin: true,
     anticipatePin: 1,
   },
@@ -113,20 +113,55 @@ timelineScroll.to(sabre, {
 timelineScroll.to(horizontalScroll, {
   x: -scrolMarchelWidth,
   ease: "none",
+  delay: 6,
 });
 
 timelineScroll.to(sabre, {
   y: 100,
   ease: "none",
+  delay: 6,
+});
+
+timelineScroll.to(sabre, {
+  opacity: 0,
+  ease: "none",
+  delay: 6,
 });
 
 timelineScroll.to(horizontalScroll, {
+  duration: 7,
   x: -horizontalScroll.scrollWidth + scrolMarchelWidth,
   ease: "none",
 });
 
-timelineScroll.to(sabre, {
-  y: 0,
-  opacity: 0,
-  ease: "none",
-});
+// Chute-sabre : tomber à travers .chute-univers
+const chuteSabre = document.querySelector(".chute-sabre");
+const chuteUnivers = document.querySelector(".chute-univers");
+
+if (chuteSabre && chuteUnivers) {
+  const fallDistance = chuteUnivers.offsetHeight + 200;
+  gsap.to(chuteSabre, {
+    y: fallDistance,
+    opacity: 1,
+    scrollTrigger: {
+      trigger: ".chute-univers",
+      start: "top top",
+      end: "bottom top",
+      scrub: 8,
+      markers: false,
+    },
+  });
+} else if (chuteSabre) {
+  // fallback: original behaviour if .chute-univers not present
+  gsap.to(chuteSabre, {
+    y: 500,
+    opacity: 1,
+    scrollTrigger: {
+      trigger: ".chute-container-case",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 8,
+      markers: false,
+    },
+  });
+}

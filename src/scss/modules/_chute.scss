@@ -1,54 +1,45 @@
-.chute-case {
-  position: relative;
-  overflow: hidden;
+.chute-container-case {
   top: -700px;
   z-index: 100;
-}
-
-.chute-container {
-  position: relative;
-  height: 100vh;
+  padding-top: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 300px;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 .chute-univers {
   position: relative;
-  width: 100%;
-}
-
-.chute-univers img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: 200 0 400 0px;
 }
 
 .chute-univers img:nth-child(1) {
+  position: absolute;
   z-index: 4;
-  transform: translate(-60%, -60%) scale(1);
   opacity: 0.7;
 }
 
 .chute-univers img:nth-child(2) {
+  position: absolute;
   z-index: 3;
-  transform: translate(-30%, -45%);
   opacity: 0.95;
 }
 
 .chute-univers img:nth-child(3) {
+  position: absolute;
   z-index: 2;
-  transform: translate(-60%, -50%);
   opacity: 0.9;
 }
 
 .chute-univers img:nth-child(4) {
+  position: absolute;
   z-index: 1;
-  transform: translate(-60%, -40%);
   opacity: 0.85;
+}
+
+.chute-sabre {
+  position: absolute;
+  width: 900px;
+  z-index: 20;
 }
