@@ -23,12 +23,13 @@ gsap.to(montagneDevant, {
 });
 
 gsap.to(sabre, {
-  x: "80%",
+  x: "100%",
+  ease: "power2.out",
   scrollTrigger: {
     trigger: "body",
     start: "top top",
     end: "bottom center",
-    scrub: 1,
+    scrub: 3,
     markers: false,
   },
 });
@@ -45,21 +46,6 @@ gsap.to(montagneDerriere, {
   },
 });
 
-// // Sabre monte : atteint -400 avant que montagne_01 se décale
-// gsap
-//   .timeline({
-//     scrollTrigger: {
-//       trigger: "body",
-//       start: "top top",
-//       end: "bottom center",
-//       scrub: 1,
-//       markers: false,
-//     },
-//   })
-//   .to(sabre, { y: -400 }, 0)
-//   .to(sabre, { y: -850 }, 0.5)
-//   .to(sabre, { y: -400 }, 1);
-
 // Montagne_01 monte pendant la première moitié, puis disparait à gauche
 gsap
   .timeline({
@@ -72,7 +58,8 @@ gsap
     },
   })
   .to(montagneFond, { y: -100 }, 0)
-  .to(montagneFond, { x: -2000 }, 0.2);
+  .to(montagneFond, { x: -2000 }, 0.2)
+  .to(montagneFond, { x: -2000 }, 0.9);
 
 // H1 monte et rétrécit pendant la première moitié, puis monte au top
 gsap
@@ -88,13 +75,14 @@ gsap
   .to(h1, { y: -400, scale: 0.3 }, 0)
   .to(h1, { y: -800, scale: 0.2 }, 0.5);
 
+// Timeline principale de scroll sabre
 const timelineScroll = gsap.timeline({
   scrollTrigger: {
     trigger: ".scroll-container",
     start: "top top",
     scrub: 6,
     pin: true,
-    anticipatePin: 1,
+    anticipatePin: 2,
   },
 });
 
@@ -106,8 +94,9 @@ const scrolMarchelWidth = scrollMarche.scrollWidth - window.innerWidth;
 const scrolljugementWidth = scrolljugement.scrollWidth - window.innerWidth;
 
 timelineScroll.to(sabre, {
-  y: -400,
-  ease: "none",
+  y: -100,
+  ease: "power2.out",
+  duration: 60,
 });
 
 timelineScroll.to(horizontalScroll, {
@@ -117,19 +106,14 @@ timelineScroll.to(horizontalScroll, {
 });
 
 timelineScroll.to(sabre, {
-  y: 100,
-  ease: "none",
-  delay: 6,
-});
-
-timelineScroll.to(sabre, {
   opacity: 0,
-  ease: "none",
-  delay: 6,
+  ease: "power2.out",
+  duration: 25,
+  delay: 30,
 });
 
 timelineScroll.to(horizontalScroll, {
-  duration: 7,
+  duration: 600,
   x: -horizontalScroll.scrollWidth + scrolMarchelWidth,
   ease: "none",
 });
@@ -139,14 +123,15 @@ const chuteSabre = document.querySelector(".chute-sabre");
 const chuteUnivers = document.querySelector(".chute-univers");
 
 if (chuteSabre && chuteUnivers) {
-  const fallDistance = chuteUnivers.offsetHeight + 200;
+  const fallDistance = (chuteUnivers.offsetHeight + 400) * 2.3;
   gsap.to(chuteSabre, {
     y: fallDistance,
+    x: -200,
     opacity: 1,
     scrollTrigger: {
-      trigger: ".chute-univers",
+      trigger: ".chute-sabre",
       start: "top top",
-      end: "bottom top",
+      end: `+=${fallDistance}`,
       scrub: 8,
       markers: false,
     },
@@ -154,14 +139,60 @@ if (chuteSabre && chuteUnivers) {
 } else if (chuteSabre) {
   // fallback: original behaviour if .chute-univers not present
   gsap.to(chuteSabre, {
-    y: 500,
+    y: 1000,
+    x: -200,
     opacity: 1,
     scrollTrigger: {
-      trigger: ".chute-container-case",
+      trigger: ".chute-sabre",
       start: "top top",
-      end: "bottom bottom",
+      end: "+=500",
       scrub: 8,
       markers: false,
     },
   });
+}
+
+// Animations pour les astres dans .chute-univers
+const chuteUniversEl = document.querySelector(".chute-univers");
+if (chuteUniversEl) {
+  const imgs = chuteUniversEl.querySelectorAll("img");
+  // safeguard: on attend au moins 4 images (planete, astre_01, astre_02, astre_03)
+  if (imgs.length >= 4) {
+    const planete = imgs[0];
+    const astre1 = imgs[1];
+    const astre2 = imgs[2];
+    const astre3 = imgs[3];
+
+    const triggerSettings = {
+      trigger: ".chute-univers",
+      start: "top 80%",
+      end: "bottom 60%",
+      scrub: 1,
+      markers: false,
+    };
+
+    // planete et astre_03 apparaissent depuis la gauche (accentué)
+    gsap.from([planete, astre3], {
+      x: -600,
+      y: 40,
+      scale: 0.6,
+      opacity: 0,
+      duration: 1.6,
+      stagger: 0.35,
+      ease: "back.out(1.7)",
+      scrollTrigger: triggerSettings,
+    });
+
+    // astre_01 et astre_02 apparaissent depuis la droite (accentué)
+    gsap.from([astre1, astre2], {
+      x: 600,
+      y: 40,
+      scale: 0.6,
+      opacity: 0,
+      duration: 1.6,
+      stagger: 0.35,
+      ease: "back.out(1.7)",
+      scrollTrigger: triggerSettings,
+    });
+  }
 }
