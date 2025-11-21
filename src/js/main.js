@@ -3,14 +3,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Elements
 const montagneDevant = document.querySelector(".montagne_devant");
 const montagneDerriere = document.querySelector(".montagne_derriere");
 const h1 = document.querySelector("h1");
 const montagneFond = document.querySelector(".montagne_fond");
 const sabre = document.querySelector(".montagne_sabre");
 
-// Montagne_03 disparait à gauche
 gsap.to(montagneDevant, {
   x: -1800,
   scrollTrigger: {
@@ -34,7 +32,6 @@ gsap.to(sabre, {
   },
 });
 
-// Montagne_02 disparait à droite
 gsap.to(montagneDerriere, {
   x: 1800,
   scrollTrigger: {
@@ -46,7 +43,6 @@ gsap.to(montagneDerriere, {
   },
 });
 
-// Montagne_01 monte pendant la première moitié, puis disparait à gauche
 gsap
   .timeline({
     scrollTrigger: {
@@ -61,7 +57,6 @@ gsap
   .to(montagneFond, { x: -2000 }, 0.2)
   .to(montagneFond, { x: -2000 }, 0.9);
 
-// H1 monte et rétrécit pendant la première moitié, puis monte au top
 gsap
   .timeline({
     scrollTrigger: {
@@ -75,7 +70,6 @@ gsap
   .to(h1, { y: -400, scale: 0.3 }, 0)
   .to(h1, { y: -800, scale: 0.2 }, 0.5);
 
-// Timeline principale de scroll sabre
 const timelineScroll = gsap.timeline({
   scrollTrigger: {
     trigger: ".scroll-container",
@@ -86,7 +80,6 @@ const timelineScroll = gsap.timeline({
   },
 });
 
-// scroll horizontal paysage vers la droite
 const horizontalScroll = document.querySelector(".scroll-horizontal");
 const scrollMarche = document.querySelector(".scroll-marche");
 const scrolljugement = document.querySelector(".scroll-jugement");
@@ -118,7 +111,6 @@ timelineScroll.to(horizontalScroll, {
   ease: "none",
 });
 
-// Chute-sabre : tomber à travers .chute-univers
 const chuteSabre = document.querySelector(".chute-sabre");
 const chuteUnivers = document.querySelector(".chute-univers");
 
@@ -137,7 +129,6 @@ if (chuteSabre && chuteUnivers) {
     },
   });
 } else if (chuteSabre) {
-  // fallback: original behaviour if .chute-univers not present
   gsap.to(chuteSabre, {
     y: 1000,
     x: -200,
@@ -152,11 +143,10 @@ if (chuteSabre && chuteUnivers) {
   });
 }
 
-// Animations pour les astres dans .chute-univers
 const chuteUniversEl = document.querySelector(".chute-univers");
 if (chuteUniversEl) {
   const imgs = chuteUniversEl.querySelectorAll("img");
-  // safeguard: on attend au moins 4 images (planete, astre_01, astre_02, astre_03)
+
   if (imgs.length >= 4) {
     const planete = imgs[0];
     const astre1 = imgs[1];
@@ -171,7 +161,6 @@ if (chuteUniversEl) {
       markers: false,
     };
 
-    // planete et astre_03 apparaissent depuis la gauche (accentué)
     gsap.from([planete, astre3], {
       x: -600,
       y: 40,
@@ -183,7 +172,6 @@ if (chuteUniversEl) {
       scrollTrigger: triggerSettings,
     });
 
-    // astre_01 et astre_02 apparaissent depuis la droite (accentué)
     gsap.from([astre1, astre2], {
       x: 600,
       y: 40,
